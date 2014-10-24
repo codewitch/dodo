@@ -1,0 +1,156 @@
+@import 'constants';
+
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: "museo-slab";
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  min-height: 100%;
+}
+
+.header-container{
+  margin-left: 150px;
+  color: $beige;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+
+  .header-section{
+    background-color: $blue;
+    height: 60px;
+    width: auto;
+
+    button.hamburger{
+      height: 40px;
+      margin: 10px;
+      vertical-align: top;
+    }
+
+    .title{
+      font-weight: 400;
+      display: inline-block;
+      vertical-align: top;
+      height: 20px;
+      margin: 20px 10px;
+    }
+  }
+}
+
+.hamburger-bar{
+  background-color: $beige;
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  margin: 6px 0;
+}
+
+.sidebar-left{
+  position: fixed;
+  z-index: 1;
+  width: 150px;
+  height: 100%;
+  background: $grey;
+
+  &.ng-hide{
+    width: 0;
+
+    & ~ .header-container, & ~ .main-container{
+      margin-left: 0px;
+    }
+  }
+}
+
+.sidebar-left.ng-hide-add.ng-hide-add-active,
+.sidebar-left.ng-hide-remove.ng-hide-remove-active,
+.header-container, .main-container{
+  -webkit-transition: 0.3s linear all;
+  -moz-transition: 0.3s linear all;
+  -o-transition: 0.3s linear all;
+  transition: 0.3s linear all;
+}
+
+.main-container{
+  margin-left: 150px;
+  background-color: $beige;
+  min-height: 100%;
+  padding: 100px 40px 40px 40px;
+  box-sizing: border-box;
+
+  #todo-list{
+
+    .todo-item{
+      margin-bottom: 20px;
+    }
+
+    label.checkbox{
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 15px;
+      vertical-align: top;
+      width: 45px;
+      height: 35px;
+
+      &.checkbox-false{
+        background: url('../images/grey_check.png') no-repeat;
+        background-size: 30px auto;
+      }
+
+      &.checkbox-true{
+        background: url('../images/green_check.png') no-repeat;
+        background-size: 30px auto;
+      }
+    }
+
+    .todo-content{
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+
+      .todo-title{
+        margin-bottom: 5px;
+      }
+    }
+
+    button.delete{
+      margin-left: 10px;
+      margin-top: 15px;
+    }
+  }
+
+  button.delete{
+    img{
+      width: 20px;
+    }
+  }
+
+  .add-todo{
+    width: 100%;
+    height: 50px;
+    border: 2px dashed $grey;
+    border-radius: 5px;
+    color: $grey;
+    font-family: inherit;
+  }
+
+  #todo-form div{
+    display: inline-block;
+    vertical-align: top;
+
+    .due-date-input{
+      display: block;
+      width: 120px;
+    }
+
+    .title-input{
+      display: block;
+    }
+
+    .details-input{
+      display: block;
+    }
+  }
+}
+
