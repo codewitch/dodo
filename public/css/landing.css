@@ -1,0 +1,52 @@
+/*COLORS*/
+/*MIXINS*/
+/*ELEMENT CONSTANTS*/
+h3 {
+  font-weight: 500;
+  font-size: 20px; }
+
+p {
+  font-size: 13px;
+  font-weight: 400;
+  color: #8b8885; }
+
+button, label {
+  cursor: pointer; }
+
+.no-display {
+  display: none; }
+
+/*DISABLE DEFAULTS*/
+button {
+  border: 1px solid transparent;
+  background-color: transparent;
+  outline: none; }
+
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0; }
+
+.landing-container {
+  width: 100%;
+  height: 100%;
+  background: #6c748c;
+  text-align: center; }
+  .landing-container .landing-logo-container {
+    height: 400px;
+    padding-top: 100px; }
+    .landing-container .landing-logo-container img.logo-img {
+      width: 400px;
+      display: block;
+      margin: auto; }
+    .landing-container .landing-logo-container .landing-logo-img {
+      opacity: 1; }
+      .landing-container .landing-logo-container .landing-logo-img.ng-hide {
+        opacity: 0; }
+    .landing-container .landing-logo-container .landing-logo-img.ng-hide-add.ng-hide-add-active,
+    .landing-container .landing-logo-container .landing-logo-img.ng-hide-remove.ng-hide-remove-active {
+      -webkit-transition: 0.5s linear all;
+      -moz-transition: 0.5s linear all;
+      -o-transition: 0.5s linear all;
+      transition: 0.5s linear all; }
+
+/*# sourceMappingURL=landing.css.map */

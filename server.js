@@ -1,4 +1,3 @@
-
 /**** dependencies set up ****/
 var express = require('express');
 var app = express();                            // create app with express
@@ -18,10 +17,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
 /**** define model ****/
+var userMongo = mongoose.model('User', {
+  user_id : Number,
+  google_id : String
+});
 var todoMongo = mongoose.model('Todo', {
   text : String,
   details : String,
   date : Date,
+  user_id : Number,
   done : Boolean
 });
 
@@ -76,6 +80,38 @@ console.log("App listening on port 8080");
     });
   });
 
+  //create or sign in user
+  app.post('/api/user', function(req, res){
+    //lookup google id to see if user exists
+    googleId = req.body.google_id;
+    todoMongo.findOne({ google_id: googleId }, function(err, User){
+      if(err)
+        res.send(err);
+
+      if(User){
+        //User exists
+      }else{
+        //Create new user
+        User = createNewUser(googleId);
+      }
+
+      //change this so it only gets your todos
+      getTodos(req, res);
+    });
+  });
+
+  app.get('/api/test', function(req, res){
+    todoMongo.findOne({ google_id: "123" }, function(err, User){
+      if(err)
+        res.send(err);
+      if(User){
+        res.json(User);
+      }else{
+        res.send('none')
+      }
+    });
+  });
+
   // application
   app.get('*', function(req, res){
     res.sendfile('./public/index.html');
@@ -106,5 +142,17 @@ function getTodos(req, res){
     if (err)
       res.send(err);
     res.json(todos);
+  });
+}
+
+function createNewUser(googleId){
+  //todo: auto increment user_id and make it unique
+  todoMongo.create({
+    "user_id" : 1,
+    "google_id" : googleId
+  }, function(err, user) {
+    if (err)
+      return err;
+    return user;
   });
 }

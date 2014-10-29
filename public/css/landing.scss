@@ -1,0 +1,35 @@
+@import 'constants';
+
+.landing-container{
+  width: 100%;
+  height: 100%;
+  background: $blue;
+  text-align: center;
+
+  .landing-logo-container{
+    height: 400px;
+    padding-top: 100px;
+
+    img.logo-img{
+      width: 400px;
+      display: block;
+      margin: auto;
+    }
+
+    .landing-logo-img{
+      opacity: 1;
+
+      &.ng-hide{
+        opacity: 0;
+      }
+    }
+
+    .landing-logo-img.ng-hide-add.ng-hide-add-active,
+    .landing-logo-img.ng-hide-remove.ng-hide-remove-active{
+      -webkit-transition: 0.5s linear all;
+      -moz-transition: 0.5s linear all;
+      -o-transition: 0.5s linear all;
+      transition: 0.5s linear all;
+    }
+  }
+}

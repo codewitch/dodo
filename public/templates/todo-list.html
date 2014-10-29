@@ -1,0 +1,69 @@
+
+  <div class="sidebar-left ng-hide" ng-show="showSidebarLeft">
+  </div>
+  <div class="header-container">
+    <div class="header-section">
+      <button type="button" class="hamburger" ng-click="showSidebarLeft=!showSidebarLeft;">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="title">
+        NAME OF TODO LIST
+      </div>
+    </div>
+
+  </div>
+  <div class="main-container">
+
+    <!-- TODO LIST -->
+    <div id="todo-list">
+        <!-- LOOP OVER THE TODODS In $scope.todos -->
+        <div ng-repeat="todo in todos" class="todo-item">
+          <label class="checkbox checkbox-{{todo.done}}" >
+            <input type="checkbox" class="no-display" ng-model="todo.done" ng-change="updateTodo(todo)" />
+          </label>
+          <div class="todo-content">
+            <!-- due date -->
+            <p class="todo-date">
+              {{ (todo.date | date:"MM/dd/yyyy") || "--/--/----" }}
+            </p>
+            <div class="todo-text">
+              <h3 class="todo-title">
+                {{ todo.text }}
+              </h3>
+              <p class="todo-details">
+                {{ todo.details }}
+              </p>
+            </div>
+          </div>
+          <button type="button" class="delete">
+            <img src="images/grey_x.png" ng-click="deleteTodo(todo._id)">
+          </button>
+        </div>
+    </div>
+
+    <button type="button" class="add-todo" ng-click="showTodoForm = true" ng-show="!showTodoForm">
+      + New Todo
+    </button>
+
+    <!-- FORM TO CREATE TODOS -->
+    <div id="todo-form" class="row" ng-show="showTodoForm">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <form>
+          <div class="form-group">
+            <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+            <input type="date" class="due-date-input" ng-model="formData.date">
+            <input type="text" class="title-input" placeholder="Enter Todo Item" ng-model="formData.text">
+            <textarea type="text" class="details-input" placeholder="Enter Todo Details" ng-model="formData.details"></textarea>
+          </div>
+
+          <!-- createTodo() WILL CREATE NEW TODOS -->
+          <button type="submit" class="btn" ng-click="createTodo(); showTodoForm = false;">Add</button>
+        </form>
+      </div>
+      <button type="button" class="delete">
+        <img src="images/grey_x.png" ng-click="showTodoForm = false">
+      </button>
+    </div>
+  </div>
