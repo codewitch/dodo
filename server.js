@@ -18,7 +18,6 @@ app.use(methodOverride());
 
 /**** define model ****/
 var userMongo = mongoose.model('User', {
-  user_id : Number,
   google_id : String
 });
 var todoMongo = mongoose.model('Todo', {
@@ -35,49 +34,20 @@ console.log("App listening on port 8080");
 
 /**** routes ****/
 
-  // api
+  // endpoints
   // get all todos
   app.get('/api/todos', function(req, res) {
-
-    // use mongoose to get all the todos from the database
     getTodos(req, res);
   });
 
   // create or update todo and send back all todos
   app.post('/api/todos', function(req, res){
-    if (req.body._id){
-      //find by id and update
-      todoMongo.findByIdAndUpdate(req.body._id, filterRequestData(req.body),
-                                  { upsert: true }, function(err, todo) {
-        if (err)
-          res.send(err);
-
-        //return all todos
-        getTodos(req, res);
-      });
-    }else{
-      // create todo
-      todoMongo.create(filterRequestData(req.body), function(err, todo) {
-        if (err)
-          res.send(err);
-
-        //return all todos
-        getTodos(req, res);
-      });
-    }
+    addOrUpdateTodo(req, res);
   });
 
   // delete a todo
   app.delete('/api/todos/delete/:todo_id', function(req, res){
-    todoMongo.remove({
-      _id : req.params.todo_id
-    }, function(err, todo) {
-      if (err)
-        res.send(err);
-
-      //return all todos
-      getTodos(req, res);
-    });
+    deleteTodo(req, res);
   });
 
   //create or sign in user
@@ -97,18 +67,6 @@ console.log("App listening on port 8080");
 
       //change this so it only gets your todos
       getTodos(req, res);
-    });
-  });
-
-  app.get('/api/test', function(req, res){
-    todoMongo.findOne({ google_id: "123" }, function(err, User){
-      if(err)
-        res.send(err);
-      if(User){
-        res.json(User);
-      }else{
-        res.send('none')
-      }
     });
   });
 
@@ -145,10 +103,40 @@ function getTodos(req, res){
   });
 }
 
+function addOrUpdateTodo(req, res){
+  if (req.body._id){
+    //find by id and update
+    todoMongo.findByIdAndUpdate(req.body._id, filterRequestData(req.body),
+                                { upsert: true }, function(err, todo) {
+      if (err)
+        res.send(err);
+    });
+  }else{
+    // create todo
+    todoMongo.create(filterRequestData(req.body), function(err, todo) {
+      if (err)
+        res.send(err);
+    });
+  }
+  //return all todos
+  getTodos(req, res);
+};
+
+function deleteTodo(req, res){
+  todoMongo.remove({
+    _id : req.params.todo_id
+  }, function(err, todo) {
+    if (err)
+      res.send(err);
+
+    //return all todos
+    getTodos(req, res);
+  });
+}
+
 function createNewUser(googleId){
   //todo: auto increment user_id and make it unique
   todoMongo.create({
-    "user_id" : 1,
     "google_id" : googleId
   }, function(err, user) {
     if (err)

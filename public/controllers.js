@@ -73,9 +73,20 @@ dodoControllers.controller('landingController', ['$scope', '$timeout', function(
     });
   });
 
+  //handles what happens after signin
   $scope.handleResponse = function(resp) {
     console.log(resp);
     console.log(resp['id']);
+
+    $http.post('/api/user', { google_id: resp['id'] })
+        .success(function(data) {
+          $scope.todos = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+
   };
 
   $scope.$on('event:google-plus-signin-failure', function (event,authResult) {

@@ -12,7 +12,7 @@ dodo.config(['$routeProvider',
           templateUrl: 'templates/landing.html',
           controller: 'landingController'
         }).
-        when('/:userid', {
+        when('/:userId', {
           templateUrl: 'templates/todo-list.html',
           controller: 'todoController'
         }).
