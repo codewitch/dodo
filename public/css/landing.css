@@ -10,6 +10,18 @@ p {
   font-weight: 400;
   color: #8b8885; }
 
+a {
+  text-decoration: none;
+  color: inherit; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+li {
+  text-decoration: none;
+  list-style: none; }
+
 button, label {
   cursor: pointer; }
 

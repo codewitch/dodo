@@ -54,12 +54,24 @@ html, body, .view-container, .view-frame{
   height: 100%;
   background: $grey;
   color: $white;
+  left: 0px;
 
   &.ng-hide{
-    width: 0;
+    left: -150px;
 
     & ~ .header-container, & ~ .main-container{
       margin-left: 0px;
+    }
+  }
+
+  ul{
+    margin-top: 20px;
+    margin-left: 20px;
+
+    .sidebar-item{
+      cursor: pointer;
+      margin-bottom: 10px;
+      border-bottom: 1px solid $white;
     }
   }
 }

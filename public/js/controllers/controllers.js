@@ -10,13 +10,20 @@ dodoControllers.controller('todoController', ['$scope', '$http', function($scope
   });
 
   $http.get('/api/todos')
-      .success(function(data) {
-        $scope.todos = data;
-        console.log(data);
-      })
-      .error(function(data) {
-        console.log('Error: ' + data);
-      });
+    .success(function(data) {
+      $scope.todos = data;
+      console.log(data);
+    })
+    .error(function(data) {
+      console.log('Error: ' + data);
+    });
+
+  $http.get('/api/user')
+    .success(function(data){
+      //get user and update the sidebar
+    }).error(function(data){
+      console.log('Error: ' + data);
+    });
 
   // when submitting the add form, send the text to the node API
   $scope.createTodo = function() {
@@ -56,4 +63,8 @@ dodoControllers.controller('todoController', ['$scope', '$http', function($scope
   };
 
   //ANIMATIONS, MAYBE RECFACTOR INTO SEPARTE MODULE
+}]);
+
+dodoControllers.controller('projectController', ['$scope', '$http', function($scope, $http) {
+  //show list of projects
 }]);
