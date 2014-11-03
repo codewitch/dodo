@@ -13,6 +13,44 @@ p {
 button, label {
   cursor: pointer; }
 
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+
+.btn-beige {
+  color: #6c748c;
+  background-color: #f7f1ec; }
+
+.btn-blue {
+  color: #f7f1ec;
+  background-color: #6c748c; }
+
+.btn-grey {
+  color: #ffffff;
+  background-color: #8b8885; }
+
+.btn-light-grey {
+  color: #6c748c;
+  background-color: #e1dacf; }
+
+input {
+  padding: 6px 12px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  border: 1px solid transparent; }
+
 .no-display {
   display: none; }
 
@@ -69,7 +107,8 @@ html, body, .view-container, .view-frame {
   z-index: 1;
   width: 150px;
   height: 100%;
-  background: #8b8885; }
+  background: #8b8885;
+  color: #ffffff; }
   .sidebar-left.ng-hide {
     width: 0; }
     .sidebar-left.ng-hide ~ .header-container, .sidebar-left.ng-hide ~ .main-container {
@@ -118,19 +157,34 @@ html, body, .view-container, .view-frame {
   .main-container .add-todo {
     width: 100%;
     height: 50px;
+    margin-top: 20px;
     border: 2px dashed #8b8885;
     border-radius: 5px;
     color: #8b8885;
     font-family: inherit; }
-  .main-container #todo-form div {
-    display: inline-block;
-    vertical-align: top; }
-    .main-container #todo-form div .due-date-input {
+  .main-container #todo-form {
+    margin-left: 55px;
+    margin-top: 40px; }
+    .main-container #todo-form .due-date-input {
       display: block;
-      width: 120px; }
-    .main-container #todo-form div .title-input {
-      display: block; }
-    .main-container #todo-form div .details-input {
-      display: block; }
+      width: 120px;
+      margin-bottom: 10px;
+      margin-right: 7px; }
+    .main-container #todo-form .title-input {
+      width: 50%;
+      display: block;
+      margin-bottom: 10px; }
+    .main-container #todo-form .details-input {
+      display: block;
+      width: 50%;
+      height: 40px;
+      border: 1px solid transparent;
+      padding: 6px 12px; }
+    .main-container #todo-form .todo-add-btn {
+      margin-top: 10px;
+      width: 80px; }
+
+#ui-datepicker-div {
+  font-size: 12px; }
 
 /*# sourceMappingURL=app.css.map */
