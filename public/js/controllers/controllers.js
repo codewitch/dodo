@@ -1,9 +1,13 @@
 'use strict';
 
-var dodoControllers = angular.module('dodoControllers', ['ngAnimate']);
+var dodoControllers = angular.module('dodoControllers', ['ngAnimate', 'inputDirectives']);
 
 dodoControllers.controller('todoController', ['$scope', '$http', function($scope, $http) {
   $scope.formData = {};
+
+  $(function() {
+    $(".due-date-input").datepicker();
+  });
 
   $http.get('/api/todos')
       .success(function(data) {
@@ -52,19 +56,4 @@ dodoControllers.controller('todoController', ['$scope', '$http', function($scope
   };
 
   //ANIMATIONS, MAYBE RECFACTOR INTO SEPARTE MODULE
-}]);
-
-dodoControllers.controller('landingController', [
-  '$scope', '$timeout',
-  function($scope, $timeout) {
-
-  //landing page controller
-  $scope.logoShow = false;
-
-  $scope.$on('$viewContentLoaded', function(){
-    $timeout(function(){
-      $scope.logoShow = true;
-    }, 500);
-  });
-
 }]);

@@ -1,4 +1,4 @@
-'user strict'
+'user strict';
 
 var dodo = angular.module('dodo', [
   'dodoControllers',

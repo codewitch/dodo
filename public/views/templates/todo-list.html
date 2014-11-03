@@ -1,6 +1,7 @@
 
   <div class="sidebar-left ng-hide" ng-show="showSidebarLeft">
   </div>
+
   <div class="header-container">
     <div class="header-section">
       <button type="button" class="hamburger" ng-click="showSidebarLeft=!showSidebarLeft;">
@@ -49,21 +50,17 @@
 
     <!-- FORM TO CREATE TODOS -->
     <div id="todo-form" class="row" ng-show="showTodoForm">
-      <div class="col-sm-8 col-sm-offset-2 text-center">
         <form>
           <div class="form-group">
             <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-            <input type="date" class="due-date-input" ng-model="formData.date">
+            <input type="text" class="due-date-input" placeholder="Due Date" ng-model="formData.date" focus-me="showTodoForm">
             <input type="text" class="title-input" placeholder="Enter Todo Item" ng-model="formData.text">
             <textarea type="text" class="details-input" placeholder="Enter Todo Details" ng-model="formData.details"></textarea>
           </div>
 
           <!-- createTodo() WILL CREATE NEW TODOS -->
-          <button type="submit" class="btn" ng-click="createTodo(); showTodoForm = false;">Add</button>
+          <button type="submit" class="btn btn-blue todo-add-btn" ng-click="createTodo(); showTodoForm = false;">Add</button>
+          <button type="button" class="btn btn-grey todo-add-btn" ng-click="showTodoForm = false">Cancel</button>
         </form>
-      </div>
-      <button type="button" class="delete">
-        <img src="images/grey_x.png" ng-click="showTodoForm = false">
-      </button>
     </div>
   </div>

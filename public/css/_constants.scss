@@ -25,6 +25,50 @@ button, label{
   cursor: pointer;
 }
 
+.btn{
+  display: inline-block;
+  text-decoration: none;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.btn-beige{
+  color: $blue;
+  background-color: $beige;
+}
+
+.btn-blue{
+  color: $beige;
+  background-color: $blue;
+}
+
+.btn-grey{
+  color: $white;
+  background-color: $grey;
+}
+
+.btn-light-grey{
+  color: $blue;
+  background-color: $light-grey;
+}
+
+input{
+  padding: 6px 12px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+}
+
 .no-display{
   display: none;
 }
