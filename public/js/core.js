@@ -9,11 +9,7 @@ dodo.config(['$routeProvider',
   function($routeProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: 'templates/landing.html',
-          controller: 'landingController'
-        }).
-        when('/:userId', {
-          templateUrl: 'templates/todo-list.html',
+          templateUrl: 'views/templates/todo-list.html',
           controller: 'todoController'
         }).
         otherwise({
