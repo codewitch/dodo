@@ -7,7 +7,7 @@ var todoSchema = mongoose.Schema({
   text : String,
   details : String,
   date : Date,
-  user_id : Number,
+  user_id : String,
   done : Boolean
 });
 

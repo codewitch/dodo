@@ -49,4 +49,26 @@ h1, h2, h3, p {
       -o-transition: 0.5s linear all;
       transition: 0.5s linear all; }
 
+.google-plus-signin {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #d9534f;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+  .google-plus-signin .google-plus {
+    font-family: FontAwesome; }
+    .google-plus-signin .google-plus:before {
+      content: "\f0d5"; }
+
 /*# sourceMappingURL=landing.css.map */

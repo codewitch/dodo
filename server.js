@@ -18,10 +18,11 @@ var configDB = require('./config/database.js');
 /*** configuration ****/
 mongoose.connect(configDB.url);
 
-//require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 //set up our express application
 app.use(express.static(__dirname + '/public')); //sets static files to the /public directory
+app.set('views', __dirname + '/public/views');
 app.use(morgan('dev')); //log every request to the console
 app.use(cookieParser()); //read cookies (needed for auth)
 app.use(bodyParser.urlencoded({'extended': 'true'}));
@@ -30,7 +31,9 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser()); //get information from html forms
 app.use(methodOverride());
 
-app.set('view engine', 'ejs'); //set up ejs for templating
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+//app.set('view engine', 'ejs'); //set up ejs for templating
 
 // required for passport
 app.use(session({ secret: 'dodomytodos'})); //session secret

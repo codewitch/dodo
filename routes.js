@@ -7,31 +7,65 @@ module.exports = function(app, passport) {
 
   /**** API ENDPOINTS ***/
   // get all todos
-  app.get('/api/todos', function(req, res) {
+  app.get('/api/todos', isLoggedIn, function(req, res) {
     getTodos(req, res);
   });
 
   // create or update todo and send back all todos
-  app.post('/api/todos', function(req, res){
+  app.post('/api/todos', isLoggedIn, function(req, res){
     addOrUpdateTodo(req, res);
   });
 
   // delete a todo
-  app.delete('/api/todos/delete/:todo_id', function(req, res){
+  app.delete('/api/todos/delete/:todo_id', isLoggedIn, function(req, res){
     deleteTodo(req, res);
   });
 
-  /**** PASSPORT ENDPOINTS ****/
+  app.get('/api/user', function(req, res){
+    if(req.isAuthenticated()){
+      res.json({status: true, user: req.user});
+    } else {
+      res.json({status: "false"});
+    }
+  });
 
+  /**** PASSPORT ENDPOINTS ****/
+  //google
+  app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+  app.get('/auth/google/callback', passport.authenticate('google', {
+    successRedirect : '/',
+    failureRedirect : '/'
+  }));
+
+  //logout
+  app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
   // application
+  app.get('/profile', isLoggedIn, function(req, res){
+    res.render('index.html')
+  });
+
   app.get('*', function(req, res){
-    res.sendfile('./public/index.html');
+    if(req.isAuthenticated()){
+      res.redirect('/profile');
+    }
+    res.render('landing.html');
   });
 
 };
 
-function filterRequestData(data){
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated())
+    return next();
+
+  res.redirect('/');
+}
+
+function filterRequestData(data, user_id){
   filteredData = {};
   if( "text" in data ){
     filteredData.text = data.text;
@@ -48,11 +82,13 @@ function filterRequestData(data){
     filteredData.done = false;
   }
 
+  filteredData.user_id = user_id;
+
   return filteredData;
 }
 
 function getTodos(req, res){
-  Todo.find(function(err, todos){
+  Todo.find({ user_id: req.user._id }, function(err, todos){
     if (err)
       res.send(err);
     res.json(todos);
@@ -62,25 +98,28 @@ function getTodos(req, res){
 function addOrUpdateTodo(req, res){
   if (req.body._id){
     //find by id and update
-    Todo.findByIdAndUpdate(req.body._id, filterRequestData(req.body),
+    Todo.findByIdAndUpdate(req.body._id, filterRequestData(req.body, req.user._id),
                                 { upsert: true }, function(err, todo) {
       if (err)
         res.send(err);
+      //return all todos
+      getTodos(req, res);
     });
   }else{
     // create todo
-    Todo.create(filterRequestData(req.body), function(err, todo) {
+    Todo.create(filterRequestData(req.body, req.user._id), function(err, todo) {
       if (err)
         res.send(err);
+      //return all todos
+      getTodos(req, res);
     });
   }
-  //return all todos
-  getTodos(req, res);
 };
 
 function deleteTodo(req, res){
   Todo.remove({
-    _id : req.params.todo_id
+    _id : req.params.todo_id,
+    user_id : req.user._id
   }, function(err, todo) {
     if (err)
       res.send(err);

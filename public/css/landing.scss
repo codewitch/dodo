@@ -33,3 +33,30 @@
     }
   }
 }
+
+.google-plus-signin{
+  text-decoration: none;
+  color: $white;
+  background-color: $google-red;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  .google-plus{
+    font-family: FontAwesome;
+
+    &:before{
+      content: "\f0d5";
+    }
+  }
+}
