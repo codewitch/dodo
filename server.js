@@ -33,7 +33,6 @@ app.use(methodOverride());
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-//app.set('view engine', 'ejs'); //set up ejs for templating
 
 // required for passport
 app.use(session({ secret: 'dodomytodos'})); //session secret
