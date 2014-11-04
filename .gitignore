@@ -3,4 +3,6 @@
 ._*
 .sass-cache
 
-assets
+assets/
+node_modules/
+bower_components/
